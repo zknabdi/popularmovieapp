@@ -8,162 +8,51 @@ import java.io.Serializable;
 import java.util.List;
 
 public class MovieResults implements Serializable {
-    @SerializedName("vote_count")
-    private int voteCount;
-    @SerializedName("id")
-    private int id;
-    @SerializedName("video")
-    private boolean video;
-    @SerializedName("vote_average")
-    private float voteAverage;
-    @SerializedName("title")
-    private String title;
-    @SerializedName("popularity")
-    private float popularity;
-    @SerializedName("poster_path")
-    private String posterPath;
-    @SerializedName("original_language")
-    private String originalLanguage;
-    @SerializedName("original_title")
-    private String originalTitle;
-    @SerializedName("genre_ids")
-    private List<Integer> genreIds = null;
-    @SerializedName("backdrop_path")
-    private String backdropPath;
-    @SerializedName("adult")
-    private boolean adult;
-    @SerializedName("overview")
-    private String overview;
-    @SerializedName("release_date")
-    private String releaseDate;
+    @SerializedName("page")
+    private int page;
+    @SerializedName("total_results")
+    private int totalResults;
+    @SerializedName("total_pages")
+    private int totalPages;
+    @SerializedName("results")
+    private List<Movie> movieList;
 
-
-    public MovieResults(int voteCount, int id, boolean video, float voteAverage, String title, float popularity, String posterPath, String originalLanguage, String originalTitle, List<Integer> genreIds, String backdropPath, boolean adult, String overview, String releaseDate) {
-        this.voteCount = voteCount;
-        this.id = id;
-        this.video = video;
-        this.voteAverage = voteAverage;
-        this.title = title;
-        this.popularity = popularity;
-        this.posterPath = posterPath;
-        this.originalLanguage = originalLanguage;
-        this.originalTitle = originalTitle;
-        this.genreIds = genreIds;
-        this.backdropPath = backdropPath;
-        this.adult = adult;
-        this.overview = overview;
-        this.releaseDate = releaseDate;
-    }//end constructor
-
-    public int getVoteCount() {
-        return voteCount;
+    public MovieResults(int page, int totalResults, int totalPages, List<Movie> movieList) {
+        this.page = page;
+        this.totalResults = totalResults;
+        this.totalPages = totalPages;
+        this.movieList = movieList;
     }
 
-    public void setVoteCount(int voteCount) {
-        this.voteCount = voteCount;
+    public int getPage() {
+        return page;
     }
 
-    public int getId() {
-        return id;
+    public void setPage(int page) {
+        this.page = page;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public int getTotalResults() {
+        return totalResults;
     }
 
-    public boolean isVideo() {
-        return video;
+    public void setTotalResults(int totalResults) {
+        this.totalResults = totalResults;
     }
 
-    public void setVideo(boolean video) {
-        this.video = video;
+    public int getTotalPages() {
+        return totalPages;
     }
 
-    public float getVoteAverage() {
-        return voteAverage;
+    public void setTotalPages(int totalPages) {
+        this.totalPages = totalPages;
     }
 
-    public void setVoteAverage(float voteAverage) {
-        this.voteAverage = voteAverage;
+    public List<Movie> getMovieList() {
+        return movieList;
     }
 
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    public float getPopularity() {
-        return popularity;
-    }
-
-    public void setPopularity(float popularity) {
-        this.popularity = popularity;
-    }
-
-    public String getPosterPath() {
-        return posterPath;
-    }
-
-    public void setPosterPath(String posterPath) {
-        this.posterPath = posterPath;
-    }
-
-    public String getOriginalLanguage() {
-        return originalLanguage;
-    }
-
-    public void setOriginalLanguage(String originalLanguage) {
-        this.originalLanguage = originalLanguage;
-    }
-
-    public String getOriginalTitle() {
-        return originalTitle;
-    }
-
-    public void setOriginalTitle(String originalTitle) {
-        this.originalTitle = originalTitle;
-    }
-
-    public List<Integer> getGenreIds() {
-        return genreIds;
-    }
-
-    public void setGenreIds(List<Integer> genreIds) {
-        this.genreIds = genreIds;
-    }
-
-    public String getBackdropPath() {
-        return backdropPath;
-    }
-
-    public void setBackdropPath(String backdropPath) {
-        this.backdropPath = backdropPath;
-    }
-
-    public boolean isAdult() {
-        return adult;
-    }
-
-    public void setAdult(boolean adult) {
-        this.adult = adult;
-    }
-
-    public String getOverview() {
-        return overview;
-    }
-
-    public void setOverview(String overview) {
-        this.overview = overview;
-    }
-
-    public String getReleaseDate() {
-        return releaseDate;
-    }
-
-    public void setReleaseDate(String releaseDate) {
-        this.releaseDate = releaseDate;
+    public void setMovieList(List<Movie> movieList) {
+        this.movieList = movieList;
     }
 }

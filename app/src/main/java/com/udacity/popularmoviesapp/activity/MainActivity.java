@@ -12,6 +12,7 @@ import com.udacity.popularmoviesapp.R;
 public class MainActivity extends AppCompatActivity {
 
     private static int currentMenuMode =1; //determines the current status of the activity(by popular or top rated)
+    
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
