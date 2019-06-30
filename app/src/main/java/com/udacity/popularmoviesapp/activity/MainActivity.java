@@ -28,7 +28,7 @@ public class MainActivity extends AppCompatActivity {
 
     private static int currentMenuMode =1; //determines the current status of the activity(by popular or top rated)
 
-    private static final String DB_API_KEY = "d23914181a70b399fef78701d2e07cb3";
+    private static final String DB_API_KEY = "";
     private static int numMoviePage; //ever four poster occupies a page
     private static int INITIAL_PAGE = 1;
     private MovieAdapter movieAdapter;
