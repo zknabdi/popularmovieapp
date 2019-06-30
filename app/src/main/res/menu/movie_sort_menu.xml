@@ -6,7 +6,7 @@
         android:title="@string/sort_title"
         app:showAsAction="always">
         <menu>
-            <item android:id="@id/sort_by_pop_movies"
+            <item android:id="@+id/sort_by_pop_movies"
                 android:title="@string/sort_popular_movies" />
             <item android:id="@+id/sort_by_top_movies"
                 android:title="@string/sort_top_rated_movies" />
