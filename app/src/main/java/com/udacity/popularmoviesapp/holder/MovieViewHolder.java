@@ -1,7 +1,6 @@
 package com.udacity.popularmoviesapp.holder;
 
 import android.content.res.Resources;
-import android.support.annotation.NonNull;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
@@ -12,51 +11,65 @@ import com.squareup.picasso.Picasso;
 import com.udacity.popularmoviesapp.R;
 import com.udacity.popularmoviesapp.adapter.MovieAdapter;
 import com.udacity.popularmoviesapp.model.Movie;
-import com.udacity.popularmoviesapp.service.ListItemClickListener;
+import com.udacity.popularmoviesapp.service.MovieListClickListener;
 
-public class MovieViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+public class MovieViewHolder extends RecyclerView.ViewHolder {
 
     private CardView mMoveCardV;
     private ImageView mMoviePoster;
     private MovieAdapter movieAdapter;
-    private static String imagePathUrl = "https://image.tmdb.org/t/p/" +"w500";
+    private static String imagePathUrl = "https://image.tmdb.org/t/p/" + "w500";
 
     public MovieViewHolder(View itemView) {
         super(itemView);
         mMoveCardV = (CardView) itemView.findViewById(R.id.cv_movie_card);
         mMoviePoster = (ImageView) itemView.findViewById(R.id.im_movie_poster);
 
-        itemView.setOnClickListener(this);
+
     }
 
 
+//    @Override
+//    public void onClick(View v) {
+//
+//        int clickedMoviePosition = getAdapterPosition();
+//        movieAdapter.mOnClickListener.onMovieListClick(clickedMoviePosition);
+//    }
 
-
-
-    @Override
-    public void onClick(View v) {
-
-        int clickedMoviePosition = getAdapterPosition();
-        movieAdapter.mOnClickListener.onListItemClick(clickedMoviePosition);
-    }
-
-    public void bind(Movie myMovie, ListItemClickListener mOnClickListener) {
-        mMoveCardV.setLayoutParams(new ViewGroup.LayoutParams(getScreenSizeWidth()/2, getImageHeight(getScreenSizeWidth()/2)));
+    public void bind(final Movie myMovie, final MovieListClickListener mOnClickListener) {
+        mMoveCardV.setLayoutParams(new ViewGroup.LayoutParams(getScreenSizeWidth() / 2, getImageHeight(getScreenSizeWidth()/2)));
         Picasso.with(mMoviePoster.getContext()).load(moviePath(myMovie.getPosterPath()))
                 .placeholder(R.drawable.ic_launcher_background)
                 .fit()
                 .into(mMoviePoster);
+       // moveSetClickListener(itemView, mOnClickListener, myMovie);
+        itemView.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v){
+                mOnClickListener.onMovieListClick(myMovie);
+            }
+        });
     }
 
+//    private void moveSetClickListener(final View itemView, final MovieListClickListener movieListClickListener, final Movie movie) {
+//        itemView.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//
+//                movieListClickListener.onMovieListClick(movie);
+//            }
+//        });
+//    }
+
     private String moviePath(String posterPath) {
-        return imagePathUrl +posterPath;
+        return imagePathUrl + posterPath;
     }
 
     private int getImageHeight(int height) {
-        return (int) (height*1.5f);
+        return (int) (height * 1.5f);
     }
 
-    private int getScreenSizeWidth(){
+    private int getScreenSizeWidth() {
 
         return Resources.getSystem().getDisplayMetrics().widthPixels;
     }

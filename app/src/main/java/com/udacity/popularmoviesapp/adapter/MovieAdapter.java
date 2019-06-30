@@ -9,7 +9,7 @@ import android.view.ViewGroup;
 import com.udacity.popularmoviesapp.R;
 import com.udacity.popularmoviesapp.holder.MovieViewHolder;
 import com.udacity.popularmoviesapp.model.Movie;
-import com.udacity.popularmoviesapp.service.ListItemClickListener;
+import com.udacity.popularmoviesapp.service.MovieListClickListener;
 
 import java.util.List;
 
@@ -19,9 +19,9 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieViewHolder> {
     private static final String TAG = MovieAdapter.class.getSimpleName();
 
     private List<Movie> moveList;
-    public ListItemClickListener mOnClickListener;
+    public MovieListClickListener mOnClickListener;
 
-    public MovieAdapter(List<Movie> moveList, ListItemClickListener mOnClickListener) {
+    public MovieAdapter(List<Movie> moveList, MovieListClickListener mOnClickListener) {
         this.moveList = moveList;
         this.mOnClickListener = mOnClickListener;
     }
@@ -32,9 +32,9 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieViewHolder> {
         Context context = viewGroup.getContext();
        int layoutID = R.layout.movie_cardview;
         LayoutInflater inflater = LayoutInflater.from(context);
-        boolean shouldAttachToViewGroupImmediately = false;
+      //  boolean shouldAttachToViewGroupImmediately = false;
 
-        View view = inflater.inflate(layoutID, viewGroup,shouldAttachToViewGroupImmediately);
+        View view = inflater.inflate(layoutID, viewGroup,false);
 
         return new MovieViewHolder(view);
     }
@@ -50,4 +50,11 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieViewHolder> {
     public int getItemCount() {
         return this.moveList.size();
     }
+
+    @Override
+    public void onViewRecycled( MovieViewHolder holder) {
+        super.onViewRecycled(holder);
+    }
+
+
 }
