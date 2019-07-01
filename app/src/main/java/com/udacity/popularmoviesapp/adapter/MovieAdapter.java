@@ -11,7 +11,6 @@ import com.squareup.picasso.Picasso;
 import com.udacity.popularmoviesapp.R;
 import com.udacity.popularmoviesapp.holder.MovieViewHolder;
 import com.udacity.popularmoviesapp.model.Movie;
-import com.udacity.popularmoviesapp.service.MovieListClickListener;
 
 import java.util.List;
 

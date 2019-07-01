@@ -2,6 +2,7 @@ package com.udacity.popularmoviesapp.activity;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -27,7 +28,7 @@ public class MainActivity extends AppCompatActivity {
 
     private static int currentMenuMode = 1; //determines the current status of the activity(by popular or top rated)
 
-    private static final String DB_API_KEY = "";
+    private static final String DB_API_KEY = "d23914181a70b399fef78701d2e07cb3";
     private static int numMoviePage; //ever four poster occupies a page
     private static int INITIAL_PAGE = 1;
     private Call<MovieResults> call;
@@ -63,10 +64,15 @@ public class MainActivity extends AppCompatActivity {
 
     private void generateMoveList(List<Movie> movieList) {
         recyclerView = (RecyclerView)findViewById(R.id.rv_movies);
+        GridLayoutManager gridLayoutManager = new GridLayoutManager(this, 2);
+        gridLayoutManager.setSpanSizeLookup(new GridLayoutManager.SpanSizeLookup() {
+            @Override
+            public int getSpanSize(int i) {
+                return 1;
+            }
+        });
+        recyclerView.setLayoutManager(gridLayoutManager);
         movieAdapter = new MovieAdapter(movieList);
-
-       RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(MainActivity.this);
-       recyclerView.setLayoutManager(layoutManager);
        recyclerView.setAdapter(movieAdapter);
     }
 
