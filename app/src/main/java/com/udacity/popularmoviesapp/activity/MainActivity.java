@@ -2,7 +2,9 @@ package com.udacity.popularmoviesapp.activity;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -12,10 +14,14 @@ import com.udacity.popularmoviesapp.R;
 import com.udacity.popularmoviesapp.adapter.MovieAdapter;
 import com.udacity.popularmoviesapp.model.Movie;
 import com.udacity.popularmoviesapp.model.MovieResults;
+import com.udacity.popularmoviesapp.service.GetMovieDataService;
+import com.udacity.popularmoviesapp.service.RetrofitInstance;
 
 import java.util.List;
 
 import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -35,6 +41,33 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        GetMovieDataService service = RetrofitInstance.getRetrofitInstance().create(GetMovieDataService.class);
+
+        Call<MovieResults> call = service.getMoviesByPopularity(DB_API_KEY);
+        Log.wtf("URL: ",call.request().url()+"");
+
+        call.enqueue(new Callback<MovieResults>() {
+            @Override
+            public void onResponse(Call<MovieResults> call, Response<MovieResults> response) {
+                generateMoveList(response.body().getMovieList());
+            }
+
+            @Override
+            public void onFailure(Call<MovieResults> call, Throwable t) {
+                Toast.makeText(MainActivity.this, "Something went wrong...Please try later!", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+
+    }
+
+    private void generateMoveList(List<Movie> movieList) {
+        recyclerView = (RecyclerView)findViewById(R.id.rv_movies);
+        movieAdapter = new MovieAdapter(movieList);
+
+       RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(MainActivity.this);
+       recyclerView.setLayoutManager(layoutManager);
+       recyclerView.setAdapter(movieAdapter);
     }
 
     @Override
