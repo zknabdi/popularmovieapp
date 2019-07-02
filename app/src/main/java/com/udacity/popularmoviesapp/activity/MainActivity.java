@@ -3,7 +3,6 @@ package com.udacity.popularmoviesapp.activity;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.Menu;
@@ -26,15 +25,14 @@ import retrofit2.Response;
 
 public class MainActivity extends AppCompatActivity {
 
-    private static int currentMenuMode = 1; //determines the current status of the activity(by popular or top rated)
-
-    private static final String DB_API_KEY = "d23914181a70b399fef78701d2e07cb3";
-    private static int numMoviePage; //ever four poster occupies a page
-    private static int INITIAL_PAGE = 1;
+    private static int currentStatusMenu = 1; //determines the current status of the activity(by popular or top rated)
+    private static final String DB_API_KEY = "";
     private Call<MovieResults> call;
     private RecyclerView recyclerView;
     private List<Movie> movieList;
     private MovieAdapter movieAdapter;
+    private GetMovieDataService service;
+
 
 
     @Override
@@ -42,11 +40,64 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        GetMovieDataService service = RetrofitInstance.getRetrofitInstance().create(GetMovieDataService.class);
+        service = RetrofitInstance.getRetrofitInstance().create(GetMovieDataService.class);
 
-        Call<MovieResults> call = service.getMoviesByPopularity(DB_API_KEY);
+        //call = service.getMoviesByPopularity(DB_API_KEY);
+        //call = service.getMoviesByTopRated(DB_API_KEY);
+
+
+
+        userSelectionLoading(currentStatusMenu);
+
+
+
+    }//end onCreate
+
+
+
+
+
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater menuInflater = getMenuInflater();
+        menuInflater.inflate(R.menu.movie_sort_menu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        switch (item.getItemId()) {
+            case R.id.sort_by_pop_movies:
+               currentStatusMenu = 1;
+               break;
+            case R.id.sort_by_top_movies:
+               currentStatusMenu = 2;
+               break;
+        }
+        Log.i("In side onOptions: ", String.valueOf(currentStatusMenu));
+        userSelectionLoading(currentStatusMenu);
+        return super.onOptionsItemSelected(item);
+    }
+
+
+    private void userSelectionLoading(int optionSort){
+
+        switch (optionSort){
+            case 1:
+                call = service.getMoviesByPopularity(DB_API_KEY);
+                break;
+            case 2:
+                call = service.getMoviesByTopRated(DB_API_KEY);
+        }
+
+        renderDBPage();
+    }//end userSelectionLoading
+
+    private void renderDBPage(){
         Log.wtf("URL: ",call.request().url()+"");
-
+        Log.i("In side Render", String.valueOf(currentStatusMenu));
         call.enqueue(new Callback<MovieResults>() {
             @Override
             public void onResponse(Call<MovieResults> call, Response<MovieResults> response) {
@@ -58,7 +109,6 @@ public class MainActivity extends AppCompatActivity {
                 Toast.makeText(MainActivity.this, "Something went wrong...Please try later!", Toast.LENGTH_SHORT).show();
             }
         });
-
 
     }
 
@@ -73,26 +123,8 @@ public class MainActivity extends AppCompatActivity {
         });
         recyclerView.setLayoutManager(gridLayoutManager);
         movieAdapter = new MovieAdapter(movieList);
-       recyclerView.setAdapter(movieAdapter);
+        recyclerView.setAdapter(movieAdapter);
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        MenuInflater menuInflater = getMenuInflater();
-        menuInflater.inflate(R.menu.movie_sort_menu, menu);
-        return true;
-    }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        Toast.makeText(this, "Test Item: " + item.getTitle(), Toast.LENGTH_SHORT).show();
-        switch (item.getItemId()) {
-            case R.id.sort_by_pop_movies:
-                return true;
-            case R.id.sort_by_top_movies:
-                return true;
-            default:
-                return super.onOptionsItemSelected(item);
-        }
-    }
 }
