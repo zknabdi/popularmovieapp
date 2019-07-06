@@ -15,8 +15,8 @@ public class MovieViewHolder  extends RecyclerView.ViewHolder {
 
     public MovieViewHolder(@NonNull View itemView) {
         super(itemView);
-        imMoviePoster = (ImageView)itemView.findViewById(R.id.im_movie_poster);
-        cvMovieCard = (CardView)itemView.findViewById(R.id.cv_movie_card);
+        imMoviePoster = itemView.findViewById(R.id.im_movie_poster);
+        cvMovieCard = itemView.findViewById(R.id.cv_movie_card);
     }
 
 

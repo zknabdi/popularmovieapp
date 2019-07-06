@@ -1,5 +1,6 @@
 package com.udacity.popularmoviesapp.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
@@ -70,11 +71,11 @@ public class MainActivity extends AppCompatActivity {
 
         switch (item.getItemId()) {
             case R.id.sort_by_pop_movies:
-               currentStatusMenu = 1;
-               break;
+                currentStatusMenu = 1;
+                break;
             case R.id.sort_by_top_movies:
-               currentStatusMenu = 2;
-               break;
+                currentStatusMenu = 2;
+                break;
         }
         Log.i("In side onOptions: ", String.valueOf(currentStatusMenu));
         userSelectionLoading(currentStatusMenu);
@@ -113,7 +114,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void generateMoveList(List<Movie> movieList) {
-        recyclerView = (RecyclerView)findViewById(R.id.rv_movies);
+        recyclerView = findViewById(R.id.rv_movies);
         GridLayoutManager gridLayoutManager = new GridLayoutManager(this, 2);
         gridLayoutManager.setSpanSizeLookup(new GridLayoutManager.SpanSizeLookup() {
             @Override
@@ -122,9 +123,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
         recyclerView.setLayoutManager(gridLayoutManager);
-        movieAdapter = new MovieAdapter(movieList);
+        movieAdapter = new MovieAdapter(movieList, this);
         recyclerView.setAdapter(movieAdapter);
     }
-
-
 }
