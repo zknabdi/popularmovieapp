@@ -4,7 +4,12 @@
     >
     <item
         android:title="@string/sort_title"
-        app:showAsAction="always">
+        app:showAsAction="ifRoom"
+        android:icon="@drawable/baseline_menu_white_18dp"
+
+
+        >
+
         <menu>
             <item android:id="@+id/sort_by_pop_movies"
                 android:title="@string/sort_popular_movies" />
