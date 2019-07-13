@@ -1,8 +1,9 @@
 package com.udacity.popularmoviesapp.activity;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -14,10 +15,13 @@ public class MovieActivity extends AppCompatActivity {
 
    TextView moveTitle, movieReleased, movieRate, movieDesc;
    ImageView moviePoster;
-    @Override
+    Toolbar toolbar;
+     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_movie);
+
+//        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         moveTitle = findViewById(R.id.movie_title);
 
@@ -26,6 +30,12 @@ public class MovieActivity extends AppCompatActivity {
         movieReleased = findViewById(R.id.movie_released_tv);
         movieRate = findViewById(R.id.movie_rate_tv);
         movieDesc = findViewById(R.id.movie_descriptions_tv);
+        toolbar = findViewById(R.id.movie_toolbar);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+
 
 
         Intent intent = getIntent();
@@ -43,4 +53,16 @@ public class MovieActivity extends AppCompatActivity {
 
 
     }
+
+//    @Override
+//    public boolean onOptionsItemSelected(MenuItem item) {
+//        switch (item.getItemId()){
+//            case android.R.id.home:
+//               onBackPressed();
+//                return true;
+//            default:
+//                return super.onOptionsItemSelected(item);
+//        }
+//
+//    }
 }

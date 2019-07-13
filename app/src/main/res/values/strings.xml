@@ -7,4 +7,7 @@
     <string name="sort_popular_movies">Popularity</string>
     <string name="about_movie">About the movie</string>
     <string name="error_message">There is error... please try again. </string>
+    <string name="favorite_movie">Favorite</string>
+    <string name="movie_name">Movie Name</string>
+    <string name="movie_duration">100 min</string>
 </resources>

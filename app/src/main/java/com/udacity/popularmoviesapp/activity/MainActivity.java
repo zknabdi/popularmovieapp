@@ -29,7 +29,7 @@ import retrofit2.Response;
 public class MainActivity extends AppCompatActivity {
 
     private static int currentStatusMenu = 1; //determines the current status of the activity(by popular or top rated)
-    private static final String DB_API_KEY = "";
+    private static final String DB_API_KEY = "d23914181a70b399fef78701d2e07cb3";
     private Call<MovieResults> call;
     private RecyclerView recyclerView;
     private List<Movie> movieList;
@@ -45,12 +45,12 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        movieToolbar = (Toolbar)findViewById(R.id.movie_toolbar);
+        movieToolbar = findViewById(R.id.movie_toolbar);
         setSupportActionBar(movieToolbar);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
 
 
-        mToolbarTitle = (TextView)findViewById(R.id.movie_toolbar_title);
+        mToolbarTitle = findViewById(R.id.movie_toolbar_title);
 
         service = RetrofitInstance.getRetrofitInstance().create(GetMovieDataService.class);
 
