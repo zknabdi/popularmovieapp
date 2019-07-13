@@ -27,8 +27,8 @@ import retrofit2.Response;
 
 public class MainActivity extends AppCompatActivity {
 
+    private static final String DB_API_KEY = "d23914181a70b399fef78701d2e07cb3";
     private static int currentStatusMenu = 1; //determines the current status of the activity(by popular or top rated)
-    private static final String DB_API_KEY = "";
     private Call<MovieResults> call;
     private RecyclerView recyclerView;
     private List<Movie> movieList;
@@ -36,7 +36,6 @@ public class MainActivity extends AppCompatActivity {
     private GetMovieDataService service;
     private Toolbar movieToolbar;
     private TextView mToolbarTitle;
-
 
 
     @Override
@@ -53,27 +52,16 @@ public class MainActivity extends AppCompatActivity {
 
         service = RetrofitInstance.getRetrofitInstance().create(GetMovieDataService.class);
 
-        //call = service.getMoviesByPopularity(DB_API_KEY);
-        //call = service.getMoviesByTopRated(DB_API_KEY);
-
-
-
         userSelectionLoading(currentStatusMenu);
 
 
-
     }//end onCreate
-
-
-
-
 
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater menuInflater = getMenuInflater();
         menuInflater.inflate(R.menu.movie_sort_menu, menu);
-//        menu.getItem(0).setIcon(ContextCompat.getDrawable(this, R.drawable.ic_launcher_background));
 
         return true;
     }
@@ -95,9 +83,9 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-    private void userSelectionLoading(int optionSort){
+    private void userSelectionLoading(int optionSort) {
 
-        switch (optionSort){
+        switch (optionSort) {
             case 1:
                 call = service.getMoviesByPopularity(DB_API_KEY);
                 break;
@@ -108,8 +96,8 @@ public class MainActivity extends AppCompatActivity {
         renderDBPage();
     }//end userSelectionLoading
 
-    private void renderDBPage(){
-        Log.wtf("URL: ",call.request().url()+"");
+    private void renderDBPage() {
+        Log.wtf("URL: ", call.request().url() + "");
         Log.i("In side Render", String.valueOf(currentStatusMenu));
         call.enqueue(new Callback<MovieResults>() {
             @Override

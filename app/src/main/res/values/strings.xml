@@ -10,4 +10,6 @@
     <string name="favorite_movie">Favorite</string>
     <string name="movie_name">Movie Name</string>
     <string name="movie_duration">100 min</string>
+    <string name="movie_added">Movie Added to your Favorite</string>
+    <string name="movie_trailer">Trailer</string>
 </resources>

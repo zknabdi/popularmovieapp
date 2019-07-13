@@ -7,6 +7,10 @@
     android:fitsSystemWindows="true"
     tools:context=".activity.MovieActivity">
 
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
     <android.support.constraint.ConstraintLayout
         android:id="@+id/movie_desc_const"
         android:layout_width="match_parent"
@@ -16,22 +20,42 @@
         tools:layout_editor_absoluteY="406dp">
 
         <TextView
+            android:id="@+id/movie_desc_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp"
+            android:autoSizeTextType="uniform"
+            android:text="@string/about_movie"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
             android:id="@+id/movie_descriptions_tv"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="16dp"
-            android:layout_marginStart="16dp"
-            android:layout_marginLeft="16dp"
             android:autoSizeTextType="uniform"
-            android:text="This is a sample movie description."
-            app:layout_constraintEnd_toEndOf="parent"
+            android:text="Here, it is the descriptions about the movie."
             app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/movie_desc_label"
             tools:ignore="HardcodedText"
-            tools:layout_editor_absoluteY="51dp"
+            android:layout_margin="16dp"
             tools:targetApi="o" />
 
+        <TextView
+            android:id="@+id/movie_activity_trailer_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:autoSizeTextType="uniform"
+            android:layout_margin="16dp"
+            android:paddingBottom="16dp"
+            android:text="@string/movie_trailer"
+            android:textColor="#000"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/movie_descriptions_tv"
+            android:visibility="visible"/>
+
     </android.support.constraint.ConstraintLayout>
+    </ScrollView>
 
     <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"
@@ -99,6 +123,7 @@
                     android:layout_marginStart="8dp"
                     android:layout_marginLeft="8dp"
                     android:layout_marginTop="71dp"
+                    app:srcCompat="@drawable/ic_launcher_background"
                     android:contentDescription="@string/movie_poster"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintLeft_toLeftOf="parent"
@@ -141,31 +166,12 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="0dp"
-                        android:text="10.0"
+                        android:text="10.0/10.0"
                         android:textSize="36sp"
                         app:layout_constraintTop_toBottomOf="@+id/movie_minute"
                         tools:ignore="HardcodedText"
 
                         />
-
-                    <!--<LinearLayout-->
-                    <!--android:layout_width="wrap_content"-->
-                    <!--android:layout_height="wrap_content"-->
-                    <!--android:orientation="horizontal">-->
-
-                    <!--<TextView-->
-                    <!--android:id="@+id/movie_rate_tv2"-->
-                    <!--android:layout_width="wrap_content"-->
-                    <!--android:layout_height="wrap_content"-->
-                    <!--android:layout_marginTop="24dp"-->
-                    <!--android:text="10.0"-->
-                    <!--android:textSize="36sp"-->
-                    <!--tools:ignore="HardcodedText" />-->
-
-
-                    <!--</LinearLayout>-->
-
-
                 </LinearLayout>
             </android.support.constraint.ConstraintLayout>
         </android.support.design.widget.CollapsingToolbarLayout>
@@ -173,5 +179,15 @@
 
     </android.support.design.widget.AppBarLayout>
 
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/movie_activity_favorite"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|end"
+        android:layout_margin="16dp"
+        app:srcCompat="@drawable/round_favorite_24"
+        android:clickable="true"
+        android:focusable="true"
+        app:backgroundTint="@color/floatButton" />
 
 </android.support.design.widget.CoordinatorLayout>
