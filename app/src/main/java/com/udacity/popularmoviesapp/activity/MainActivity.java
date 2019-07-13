@@ -27,7 +27,7 @@ import retrofit2.Response;
 
 public class MainActivity extends AppCompatActivity {
 
-    private static final String DB_API_KEY = "d23914181a70b399fef78701d2e07cb3";
+    private static final String DB_API_KEY = "";
     private static int currentStatusMenu = 1; //determines the current status of the activity(by popular or top rated)
     private Call<MovieResults> call;
     private RecyclerView recyclerView;
