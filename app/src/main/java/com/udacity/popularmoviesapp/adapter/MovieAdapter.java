@@ -40,7 +40,7 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieViewHolder> {
 
         movieViewHolder.cvMovieCard.setLayoutParams(new ViewGroup.LayoutParams(getScreenWidth() / 2, getMeasuredPosterHeight(getScreenWidth() / 2)));
         Picasso.with(movieViewHolder.imMoviePoster.getContext()).load(movieImagePathBuilder(movieList.get(indexPosition).getPosterPath()))
-                .placeholder(R.drawable.ic_launcher_background)
+                .placeholder(R.drawable.ic_image_placeholderdp)
                 .fit()
                 .into(movieViewHolder.imMoviePoster);
 

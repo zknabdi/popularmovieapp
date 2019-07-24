@@ -19,6 +19,7 @@ import com.udacity.popularmoviesapp.model.MovieResults;
 import com.udacity.popularmoviesapp.service.GetMovieDataService;
 import com.udacity.popularmoviesapp.service.RetrofitInstance;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import retrofit2.Call;
@@ -29,6 +30,7 @@ public class MainActivity extends AppCompatActivity {
 
     private static final String DB_API_KEY = "";
     private static int currentStatusMenu = 1; //determines the current status of the activity(by popular or top rated)
+    private ArrayList<Movie> favouriteMovies;
     private Call<MovieResults> call;
     private RecyclerView recyclerView;
     private List<Movie> movieList;
@@ -76,6 +78,8 @@ public class MainActivity extends AppCompatActivity {
             case R.id.sort_by_top_movies:
                 currentStatusMenu = 2;
                 break;
+            case R.id.favorite_movies_fb:
+                currentStatusMenu = 3;
         }
         Log.i("In side onOptions: ", String.valueOf(currentStatusMenu));
         userSelectionLoading(currentStatusMenu);
@@ -91,10 +95,19 @@ public class MainActivity extends AppCompatActivity {
                 break;
             case 2:
                 call = service.getMoviesByTopRated(DB_API_KEY);
+                break;
+            case 3:
+                favouriteMovies = getFavoriteMovies();
+                break;
+
         }
 
         renderDBPage();
     }//end userSelectionLoading
+
+    private ArrayList<Movie> getFavoriteMovies() {
+        return null;
+    }
 
     private void renderDBPage() {
         Log.wtf("URL: ", call.request().url() + "");
@@ -126,4 +139,6 @@ public class MainActivity extends AppCompatActivity {
         movieAdapter = new MovieAdapter(movieList, this);
         recyclerView.setAdapter(movieAdapter);
     }
+
+
 }
